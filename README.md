@@ -2,223 +2,368 @@
 
 ## 📖 Sobre o curso
 
-Este repositório reúne minhas anotações e os principais conceitos aprendidos durante o curso **SQL com MySQL: manipule e consulte dados**, da Alura.
+Este repositório reúne minhas anotações e os principais conceitos estudados durante o curso **SQL com MySQL: manipule e consulte dados**, da Alura.
 
-Ao longo do curso, aprendi desde a criação de bancos de dados e tabelas até a manipulação e consulta de informações utilizando a linguagem SQL, desenvolvendo uma base sólida para trabalhar com bancos de dados relacionais utilizando o MySQL.
+Ao longo do curso, construí uma base sólida sobre bancos de dados relacionais e a linguagem SQL, compreendendo desde sua história até a criação, manipulação e consulta de dados no MySQL. Além da prática com comandos SQL, também conheci os principais tipos de dados disponíveis no banco, boas práticas na definição de tabelas e diferentes formas de realizar consultas.
 
 ---
 
-## 🎯 Objetivos do curso
+# 🎯 Objetivos do curso
 
-- Compreender a história e os fundamentos da linguagem SQL.
-- Conhecer as principais características do MySQL.
-- Aprender a utilizar o MySQL Workbench.
-- Criar e administrar bancos de dados.
-- Criar, alterar e excluir tabelas.
-- Manipular registros utilizando comandos SQL.
-- Realizar consultas e filtros em bancos de dados.
+- Compreender a origem e evolução da linguagem SQL.
+- Conhecer a história e as características do MySQL.
+- Aprender a utilizar o MySQL Workbench e o terminal.
+- Criar bancos de dados e tabelas.
+- Manipular registros utilizando SQL.
+- Entender os diversos tipos de dados oferecidos pelo MySQL.
+- Realizar consultas utilizando filtros e operadores.
 
 ---
 
 # 📚 Conteúdo estudado
 
-## 🗄️ Introdução ao SQL e ao MySQL
+## 🏛️ História do SQL
 
-- História da linguagem SQL.
-- Conceitos de bancos de dados relacionais.
-- História e características do MySQL.
-- Instalação do MySQL Server.
-- Instalação do MySQL Workbench.
-- Navegação pelo ambiente do Workbench.
+Durante o curso foi apresentada a evolução da linguagem SQL e sua importância para bancos de dados relacionais.
+
+Foram abordados conceitos como:
+
+- Surgimento dos bancos de dados relacionais;
+- Evolução da linguagem SQL;
+- Padronização da linguagem;
+- Diferenças entre SQL padrão e implementações dos SGBDs;
+- Características do MySQL.
 
 ---
 
-## 🏗️ Criação de Bancos de Dados
+# 🖥️ Conhecendo o MySQL
 
-Aprendi a:
+Aprendi sobre:
 
-- Criar bancos de dados utilizando scripts SQL.
-- Criar bancos de dados pelo assistente gráfico.
-- Excluir bancos de dados.
-- Acessar bancos de dados existentes.
+- Instalação do MySQL Server;
+- Instalação do MySQL Workbench;
+- Navegação pelo Workbench;
+- Execução de comandos SQL;
+- Administração de bancos de dados.
 
-### Principais comandos
+Também utilizamos o MySQL diretamente pelo terminal:
 
-```sql
-CREATE DATABASE nome_banco;
+```bash
+mysql -h localhost -u root -p
+```
 
-DROP DATABASE nome_banco;
+Encerrando a sessão:
 
-USE nome_banco;
+```bash
+exit
 ```
 
 ---
 
-## 📦 Criação de Tabelas
+# 📁 Bancos de Dados
 
-Durante o curso aprendi:
+Aprendi a criar e remover bancos de dados utilizando SQL.
 
-- Os principais tipos de dados do MySQL.
-- Como definir colunas.
-- Como criar tabelas.
-- Como excluir tabelas.
-
-### Exemplo
+## Criando um banco
 
 ```sql
-CREATE TABLE clientes (
-    id INT,
+CREATE DATABASE nomeBanco;
+```
+
+ou
+
+```sql
+CREATE SCHEMA nomeBanco;
+```
+
+Também foi apresentado o uso da cláusula:
+
+```sql
+CREATE DATABASE IF NOT EXISTS nomeBanco;
+```
+
+---
+
+## Removendo um banco
+
+```sql
+DROP DATABASE nomeBanco;
+```
+
+ou
+
+```sql
+DROP SCHEMA nomeBanco;
+```
+
+Com proteção:
+
+```sql
+DROP DATABASE IF EXISTS nomeBanco;
+```
+
+---
+
+# 📦 Tipos de Dados
+
+Um dos tópicos mais completos do curso foi o estudo dos tipos de dados disponíveis no MySQL.
+
+## Números inteiros
+
+- TINYINT
+- SMALLINT
+- MEDIUMINT
+- INT
+- BIGINT
+
+Também aprendemos:
+
+- SIGNED
+- UNSIGNED
+- ZEROFILL
+- AUTO_INCREMENT
+
+Além dos erros gerados quando um valor excede os limites permitidos (**Out of Range**).
+
+---
+
+## Ponto flutuante
+
+Foram apresentados:
+
+- FLOAT
+- DOUBLE
+- DECIMAL
+
+Diferenças entre precisão e armazenamento.
+
+---
+
+## Strings
+
+Aprendemos a diferença entre:
+
+### Tamanho fixo
+
+```text
+CHAR
+```
+
+### Tamanho variável
+
+```text
+VARCHAR
+```
+
+Além dos tipos:
+
+- TEXT
+- TINYTEXT
+- MEDIUMTEXT
+- LONGTEXT
+
+---
+
+## Dados Binários
+
+- BLOB
+- TINYBLOB
+- MEDIUMBLOB
+- LONGBLOB
+
+---
+
+## Datas
+
+- DATE
+- DATETIME
+- TIMESTAMP
+- TIME
+- YEAR
+
+---
+
+## Outros tipos
+
+Também conhecemos:
+
+- ENUM
+- SET
+- COLLATE
+- Tipos espaciais (Spatial)
+
+---
+
+# 🏗️ Criação de Tabelas
+
+Aprendi a criar tabelas utilizando SQL.
+
+```sql
+CREATE TABLE produtos (
+    codigo VARCHAR(10),
     nome VARCHAR(100),
-    idade INT,
-    data_cadastro DATE,
-    ativo BOOLEAN
+    preco DECIMAL(10,2)
 );
 ```
 
+Também vimos como remover tabelas.
+
+```sql
+DROP TABLE produtos;
+```
+
 ---
 
-## 🔑 Chaves Primárias
+# 🔑 Alterando Tabelas
 
-Foi apresentado o conceito de **Primary Key**, responsável por identificar exclusivamente cada registro de uma tabela.
+Utilizamos o comando:
+
+```sql
+ALTER TABLE
+```
+
+Para diversas operações.
+
+## Adicionando chave primária
+
+```sql
+ALTER TABLE produtos
+ADD PRIMARY KEY (codigo);
+```
+
+## Adicionando colunas
+
+```sql
+ALTER TABLE produtos
+ADD COLUMN estoque INT;
+```
+
+---
+
+# ✍️ Manipulação de Dados
+
+## Inserção
+
+```sql
+INSERT INTO produtos (...)
+VALUES (...);
+```
+
+---
+
+## Atualização
+
+```sql
+UPDATE produtos
+SET preco = 15.90
+WHERE codigo = '100';
+```
+
+---
+
+## Exclusão
+
+```sql
+DELETE FROM produtos
+WHERE codigo = '100';
+```
+
+---
+
+# 🔎 Consultas
+
+Foram estudadas diversas formas de consulta utilizando o comando SELECT.
+
+## Consultando todos os registros
+
+```sql
+SELECT *
+FROM produtos;
+```
+
+---
+
+## Selecionando colunas
+
+```sql
+SELECT nome, preco
+FROM produtos;
+```
+
+---
+
+## Filtrando registros
+
+Utilizando:
+
+```sql
+WHERE
+```
+
+Operadores:
+
+- =
+- >
+- <
+- >=
+- <=
+- <>
+- !=
+
+---
+
+## Consultas por datas
+
+```sql
+SELECT *
+FROM produtos
+WHERE dataCadastro >= '2026-01-01';
+```
+
+---
+
+## Filtros compostos
+
+Foram utilizados operadores como:
+
+- AND
+- OR
+- NOT
 
 Exemplo:
 
 ```sql
-CREATE TABLE produtos (
-    id INT PRIMARY KEY,
-    nome VARCHAR(100)
-);
-```
-
-Também foi mostrado o cuidado necessário ao definir uma chave primária para evitar registros duplicados.
-
----
-
-# ✏️ Manipulação de Dados (DML)
-
-Aprendi os principais comandos para manipular registros.
-
-## Inserindo dados
-
-```sql
-INSERT INTO clientes
-VALUES (1, 'Beatriz', 20, '2026-08-07', TRUE);
-```
-
----
-
-## Atualizando dados
-
-```sql
-UPDATE clientes
-SET nome = 'Beatriz Lima'
-WHERE id = 1;
-```
-
----
-
-## Excluindo registros
-
-```sql
-DELETE FROM clientes
-WHERE id = 1;
-```
-
----
-
-# 🔎 Consultando Dados
-
-O curso apresentou diversas formas de realizar consultas.
-
-## Selecionando todos os registros
-
-```sql
-SELECT * FROM clientes;
-```
-
----
-
-## Selecionando colunas específicas
-
-```sql
-SELECT nome, idade
-FROM clientes;
-```
-
----
-
-## Filtrando informações
-
-### Igualdade
-
-```sql
 SELECT *
-FROM clientes
-WHERE nome = 'Beatriz';
+FROM produtos
+WHERE preco > 10
+AND estoque > 0;
 ```
 
 ---
 
-### Maior e menor
+# 💡 Curiosidades aprendidas
+
+- O SQL utilizado no MySQL **não é Case Sensitive**, ou seja, comandos podem ser escritos em letras maiúsculas ou minúsculas.
+
+Exemplo:
 
 ```sql
-SELECT *
-FROM clientes
-WHERE idade >= 18;
+select * from produtos;
 ```
+
+é equivalente a
 
 ```sql
-SELECT *
-FROM clientes
-WHERE idade < 30;
+SELECT * FROM produtos;
 ```
 
----
-
-### Filtros por datas
-
-```sql
-SELECT *
-FROM clientes
-WHERE data_cadastro >= '2026-01-01';
-```
-
----
-
-### Filtros compostos
-
-```sql
-SELECT *
-FROM clientes
-WHERE idade >= 18
-AND ativo = TRUE;
-```
-
-Também foram utilizados operadores como:
-
-- `AND`
-- `OR`
-- `NOT`
-
----
-
-# 📌 Tipos de Dados
-
-Durante o curso conheci alguns dos principais tipos de dados do MySQL:
-
-| Tipo | Utilização |
-|-------|------------|
-| INT | Números inteiros |
-| VARCHAR | Texto com tamanho variável |
-| CHAR | Texto com tamanho fixo |
-| DATE | Datas |
-| BOOLEAN | Valores verdadeiro ou falso |
+Embora a convenção seja escrever comandos SQL em letras maiúsculas para facilitar a leitura.
 
 ---
 
 # 🛠️ Tecnologias utilizadas
 
+- SQL
 - MySQL
 - MySQL Workbench
-- SQL
-
+- MySQL Command Line
